@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import PublicRoutes from "./PublicRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -11,6 +11,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route element={<PublicRoutes />}>
+        <Route path="/" element={<Navigate to="/sign-in" />} />;
         <Route path="/sign-in" element={<SignIn />} />;
         <Route path="/sign-up" element={<SignUp />} />;
       </Route>

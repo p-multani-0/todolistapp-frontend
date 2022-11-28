@@ -7,7 +7,7 @@ import CardContainer from "../components/Todo/CardContainer";
 import PageHeader from "../components/Todo/PageHeader";
 import PageTitle from "../components/Todo/PageTitle";
 import TodoModal from "../components/Todo/TodoModal";
-import { getTodos } from "../lib/api";
+import { getTodos, signOutCall } from "../lib/api";
 import { deleteToken } from "../lib/token";
 const DEFAULT_TODO = {
   title: "",
@@ -29,23 +29,25 @@ const Home = () => {
     const todoList = await getTodos();
     setTodos(todoList);
   };
-  const signOut = () => {
+  const signOut = async () => {
+    const result = await signOutCall();
     deleteToken(process.env.REACT_APP_AUTH_TOKEN_NAME);
     navigate("/sign-in");
   };
+
   return (
     <>
       <div className="bg-white">
         <PageHeader>
           <PageTitle>TODO LIST</PageTitle>
-          <div className="content-end justify-end">
+          <div className="flex justify-end">
           <button
-            className="w-[20%] h-[20%] mr-4"
+            className="w-[10%] h-[10%] mr-4"
             onClick={() => setOpenTodoModal(true)}
           >
             <PencilAltIcon />
           </button>
-          <button className="w-[20%] h-[20%] ml-4" onClick={() => signOut()}>
+          <button className="w-[10%] h-[10%] ml-4" onClick={() => signOut()}>
             <LogoutIcon />
           </button>
           </div>

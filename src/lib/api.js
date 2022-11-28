@@ -81,4 +81,18 @@ const deleteTodo = async (id) => {
   }
 };
 
-export { createTodo, getTodos, getTodoById, updateTodo, deleteTodo };
+const signOutCall = async () => {
+  const apiUrl = `${process.env.REACT_APP_SERVER_URL}/sign-out`;
+  try {
+    const { data } = await axios.post(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { createTodo, getTodos, getTodoById, updateTodo, deleteTodo, signOutCall };
